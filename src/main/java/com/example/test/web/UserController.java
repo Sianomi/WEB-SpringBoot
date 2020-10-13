@@ -1,24 +1,39 @@
 package com.example.test.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import com.example.test.dto.UserDTO;
 import com.example.test.model.UserModel;
 import com.example.test.service.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
+@RequiredArgsConstructor
 @Controller
 public class UserController {
-	
-    @Autowired
-    UserService UserService;
 
-    @RequestMapping("/list")
-    public String list(Model model) {
-        UserModel user = UserService.printUser();
-        model.addAttribute("user", user);
+  private final UserService userService;
+  
+  @GetMapping("/signup")
+  public String dispSignup() {
+      return "/signup";
+  }
+  @PostMapping("/signup")
+  public String signup(UserDTO infoDto) { // 회원 추가
+    userService.save(infoDto);
+    return "redirect:/login";
+  }
 
-        return "list";
-    }
+  @GetMapping(value = "/logout")
+  public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+    new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+    return "redirect:/login";
+  }
 }
