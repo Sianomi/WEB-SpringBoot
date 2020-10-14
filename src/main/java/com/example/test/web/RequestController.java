@@ -1,5 +1,8 @@
 package com.example.test.web;
 
+import com.example.test.aws.sagemaker.endpoint;
+
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,40 +12,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class RequestController {
-
-    @GetMapping("/upload")
-    public String GetUpload()
-    {
-        return "imageTest";
-    }
-
-    @PostMapping("/upload")
+    @PostMapping(value = "/infer", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
-    public void upload(MultipartHttpServletRequest request)
-    {
+    public String upload(Model model, MultipartHttpServletRequest request) throws IOException {
         Iterator<String> itr = request.getFileNames();
+        MultipartFile mpf = null;
+        String ImgByte64 = null;
         if(itr.hasNext())
         {
-            MultipartFile mpf = request.getFile(itr.next());
-            System.out.println(mpf.getOriginalFilename() +" uploaded!");
-            try
-            { //just temporary save file info into ufile
-                System.out.println("file length : " + mpf.getBytes().length);
-                System.out.println("file name : " + mpf.getOriginalFilename());
-            } catch (IOException e)
-            {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
+            mpf = request.getFile(itr.next());
+            String OriginalFilename = mpf.getOriginalFilename();
+            System.out.println(OriginalFilename +" uploaded!");
+
+            ImgByte64 = endpoint.predict(mpf);
         }
+        return ImgByte64;
     }
 }
