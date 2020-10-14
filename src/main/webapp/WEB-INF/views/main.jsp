@@ -14,7 +14,7 @@
        소유 권한 : ${auth}</span> <br>
 
     <form id="logout" action="/logout" method="POST">
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+      <sec:csrfInput />
       <input type="submit" value="로그아웃"/>
     </form>
 

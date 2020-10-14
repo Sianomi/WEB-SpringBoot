@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
@@ -11,7 +12,7 @@
        소유 권한 : <span sec:authentication="authorities"></span> <br>
 
     <form id="logout" action="/logout" method="POST">
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+      <sec:csrfInput />
       <input type="submit" value="로그아웃"/>
     </form>
   </body>

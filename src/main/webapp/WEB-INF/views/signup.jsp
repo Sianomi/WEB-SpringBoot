@@ -1,5 +1,6 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,7 +32,9 @@
   <link href="../../css/signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
-<form class="form-signin" action="/signup" method="post">
+<form class="form-signin" th:action="@{/signup}" method="post">
+<%--  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />--%>
+  <sec:csrfInput />
   <img class="mb-4" src="../../bootstrap/brand/AWS-logo.svg" alt="" width="144" height="144">
   <h1 class="h3 mb-3 font-weight-normal">Go sign Up</h1>
 
@@ -41,6 +44,7 @@
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required><br>
 
+  <label for="inputName" class="sr-only">Name</label>
   <label for="inputName" class="sr-only">Name</label>
   <input type="name" id="inputName" name="name" class="form-control" placeholder="Name" required>
 
