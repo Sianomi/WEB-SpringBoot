@@ -32,8 +32,7 @@
   <link href="../../css/signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
-<form class="form-signin" th:action="@{/signup}" method="post">
-<%--  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />--%>
+<form class="form-signin" th:action="@{/signup}" method="post" accept-charset="utf-8">
   <sec:csrfInput />
   <img class="mb-4" src="../../bootstrap/brand/AWS-logo.svg" alt="" width="144" height="144">
   <h1 class="h3 mb-3 font-weight-normal">Go sign Up</h1>
