@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
-import com.example.test.model.UserModel;
+import com.example.test.model.UserDAO;
 
 @Controller
 public class HomeController {
@@ -21,9 +21,9 @@ public class HomeController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Object principal = auth.getPrincipal();
 		String name = "";
-		if(principal != null && principal instanceof UserModel){
-			model.addAttribute("name", ((UserModel)principal).getName());
-			model.addAttribute("auth", ((UserModel)principal).getAuth());
+		if(principal != null && principal instanceof UserDAO){
+			model.addAttribute("name", ((UserDAO)principal).getName());
+			model.addAttribute("auth", ((UserDAO)principal).getAuth());
 		}
 		return "main";
 	}

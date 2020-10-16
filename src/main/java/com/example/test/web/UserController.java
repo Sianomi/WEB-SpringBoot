@@ -3,10 +3,8 @@ package com.example.test.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import com.example.test.dto.UserDTO;
-import com.example.test.model.UserModel;
 import com.example.test.service.UserService;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +23,7 @@ public class UserController {
   public String dispSignup() {
       return "/signup";
   }
+
   @PostMapping("/signup")
   public String signup(UserDTO infoDto) { // 회원 추가
     userService.save(infoDto);

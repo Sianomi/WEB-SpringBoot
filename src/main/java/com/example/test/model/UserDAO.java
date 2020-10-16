@@ -4,11 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,7 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class UserModel implements UserDetails {
+@Table(name="userdata")
+public class UserDAO implements UserDetails {
 	
 	@Id
 	@Column(name = "code")
@@ -44,7 +41,7 @@ public class UserModel implements UserDetails {
 	@Column(name = "auth")
 	private String auth;
 	  @Builder
-	  public UserModel(String eID, String password, String name, String phonenumber, String auth) {
+	  public UserDAO(String eID, String password, String name, String phonenumber, String auth) {
 	    this.eID = eID;
 	    this.password = password;
 	    this.name = name;
