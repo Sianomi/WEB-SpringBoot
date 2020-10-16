@@ -23,17 +23,17 @@ public class endpoint {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(resizedImage, "jpg", baos);
 
-        ByteBuffer bodyBuffer = ByteBuffer.wrap(baos.toByteArray());
-
-        AmazonSageMakerRuntime runtime = AmazonSageMakerRuntimeClientBuilder.defaultClient();
-
-        InvokeEndpointRequest request = new InvokeEndpointRequest()
-                .withEndpointName("object-detection-endpoint")
-                .withBody(bodyBuffer);
-
-        InvokeEndpointResult invokeEndpointResult = runtime.invokeEndpoint(request);
-        String bodyResponse = new String(invokeEndpointResult.getBody().array());
-        System.out.println(bodyResponse);
+//        ByteBuffer bodyBuffer = ByteBuffer.wrap(baos.toByteArray());
+//
+//        AmazonSageMakerRuntime runtime = AmazonSageMakerRuntimeClientBuilder.defaultClient();
+//
+//        InvokeEndpointRequest request = new InvokeEndpointRequest()
+//                .withEndpointName("object-detection-endpoint")
+//                .withBody(bodyBuffer);
+//
+//        InvokeEndpointResult invokeEndpointResult = runtime.invokeEndpoint(request);
+//        String bodyResponse = new String(invokeEndpointResult.getBody().array());
+//        System.out.println(bodyResponse);
 
         return ByteArraytoBase64(baos.toByteArray(), OriginalFilename);
     }
