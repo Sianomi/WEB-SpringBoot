@@ -2,7 +2,7 @@ package com.example.test.service;
 
 import com.example.test.repository.UserRepository;
 import com.example.test.dto.UserDTO;
-import com.example.test.model.UserDAO;
+import com.example.test.dao.UserDAO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
-//	UserModel printUser();
 	
 	private final UserRepository userRepository;
 	

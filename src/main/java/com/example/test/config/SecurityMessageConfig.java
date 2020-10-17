@@ -21,5 +21,4 @@ public class SecurityMessageConfig {
     messageSource.setBasenames("classpath:message/security_message", "classpath:org/springframework/security/messages"); // 커스텀한 properties 파일, security properties 파일 순서대로 설정
     return messageSource;
   }
-
 }
