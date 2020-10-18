@@ -5,29 +5,58 @@ import com.example.test.aws.SageMaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class RequestService {
     
     private final S3 s3;
 
-    public String getInferenceImage(MultipartHttpServletRequest request) throws IOException {
-        Iterator<String> itr = request.getFileNames();
-        MultipartFile mpf = null;
-        String ImgByte64 = null;
-        if(itr.hasNext())
+    private MultipartFile mpf;
+    private Map<String, String> result;
+
+    public RequestService() {
+        Map<String, String> result = new HashMap<>();
+        result.put("sagemaker","");
+        result.put("rekognition","");
+        this.result = result;
+        s3 = new S3();
+    }
+
+    private void init(MultipartFile request){
+        if(!request.isEmpty())
         {
-            mpf = request.getFile(itr.next());
+            mpf = request;
             String OriginalFilename = mpf.getOriginalFilename();
             System.out.println(OriginalFilename +" uploaded!");
-            System.out.println(s3.OriginalUpload(mpf));
-            ImgByte64 = SageMaker.predict(mpf);
+//            System.out.println(s3.OriginalUpload(mpf));
         }
-        return ImgByte64;
+    }
+
+    public String getInferenceImage(MultipartFile request, int solution) throws IOException {
+        init(request);
+        switch (solution){
+            case 1:
+                result.put("sagemaker",SageMaker.predict(mpf));
+                break;
+            case 2:
+                //rekognition 추론 입력 부분
+                break;
+            case 3:
+                result.put("sagemaker",SageMaker.predict(mpf));
+                //rekogniton 추론 입력 부분
+                break;
+            default:
+                //에러처리
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(result);
     }
 }

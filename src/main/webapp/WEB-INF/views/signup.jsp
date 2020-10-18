@@ -10,31 +10,15 @@
   <title>Signin</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
   <!-- Custom styles for this template -->
-  <link href="../../css/signin.css" rel="stylesheet">
+  <link href="/css/signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
 <form class="form-signin" th:action="@{/signup}" method="post" accept-charset="utf-8">
   <sec:csrfInput />
-  <img class="mb-4" src="../../bootstrap/brand/AWS-logo.svg" alt="" width="144" height="144">
+  <img class="mb-4" src="/bootstrap/brand/AWS-logo.svg" alt="" width="144" height="144">
   <h1 class="h3 mb-3 font-weight-normal">Go sign Up</h1>
 
   <label for="inputEmail" class="sr-only">Email address</label>

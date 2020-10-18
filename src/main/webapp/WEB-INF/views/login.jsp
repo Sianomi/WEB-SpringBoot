@@ -3,13 +3,6 @@
 <html lang="en">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<%--    <script>--%>
-<%--      $("body > form > button.btn.btn-lg.btn-primary.btn-block").keyup(function(){--%>
-<%--        var name = $("#inputEmail").val();--%>
-<%--        var pass = $("#inputPassword").val();--%>
-<%--        $.post("/login",{username:name,password:pass},"json");--%>
-<%--      });--%>
-<%--    </script>--%>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -18,26 +11,9 @@
     <title>Signin</title>
 
     <!-- Bootstrap core CSS -->
-<link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+    <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="../../css/signin.css" rel="stylesheet">
+    <link href="/css/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
     <form class="form-signin" action="/login" method="post">

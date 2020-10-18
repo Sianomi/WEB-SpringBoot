@@ -9,51 +9,9 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>Inference</title>
     <sec:csrfMetaTags />
-    <script> 
-        function setThumbnail(event) 
-        { 
-            var reader = new FileReader(); 
-            reader.onload = function(event) 
-            {
-                $("#originalImageText").text("원본 이미지");
-                $("#originalImage").attr("src", event.target.result);
-
-                $("#inferImageText").text("");
-                $("#inferImage").attr("src","");
-            };            
-
-            reader.readAsDataURL(event.target.files[0]); 
-
-        } 
-        </script>
 </head>
 <body>
-    <script>
-        $(document).ready(function() {
-            $("#file").click(function () {
-                var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
-                var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-                var csrfToken = $("meta[name='_csrf']").attr("content");
-                var headers= {};
-                headers[csrfHeader] = csrfToken;
-
-                var form = new FormData(document.getElementById('uploadForm'))
-                $.ajax({
-                    type: "POST",
-                    url: '/infer',
-                    headers:headers,
-                    data: form,
-                    dataType: 'text',
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                }).done(function(result){
-                    $("#inferImageText").text("추론 이미지");
-                    $("#inferImage").attr("src", result);
-                });
-            });
-        });
-    </script>
+    <script src="/js/main.js"></script>
     <h2>회원 전용 페이지</h2>
     ID : ${name} <br>
     소유 권한 : ${auth}</span> <br>
@@ -62,9 +20,14 @@
         <input type="submit" value="로그아웃"/>
     </form>
     <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="fileId" name="file-data" accept="image/jpeg" onchange="setThumbnail(event);"/>
+        <input type="file" id="fileId" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>
+        <select id="solution" name="solution">
+            <option value=1>SageMaker</option>
+            <option value=2>Rekognition</option>
+            <option value=3>Both</option>
+        </select>
     </form>
-            <input type="button" value="추론" id="file"/>
+    <input type="button" value="추론" id="file"/>
     <div>
         <div id="image_container" style="display: inline-block;vertical-align: top;">
             <h3 id="originalImageText"></h3>

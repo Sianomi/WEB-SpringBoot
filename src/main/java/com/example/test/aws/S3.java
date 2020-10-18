@@ -7,6 +7,8 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import lombok.Getter;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,8 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
+@Getter
 public class S3 {
     private AmazonS3 s3Client;
     private Regions clientRegion;
@@ -25,6 +31,8 @@ public class S3 {
     private String fileName;
     private MultipartFile file;
     private Authentication authentication;
+    private String date;
+    private String datetime;
 
     public S3() {
         clientRegion = Regions.AP_NORTHEAST_2;
@@ -32,13 +40,44 @@ public class S3 {
         s3Client = AmazonS3ClientBuilder.standard()
                 .withRegion(clientRegion)
                 .build();
+    }
+
+    private void init(MultipartFile file)
+    {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        date = dateFormat.format(new Date());
+
+        DateFormat datetimeFormat = new SimpleDateFormat("-yyyy-MM-dd-HH-mm-ss.");
+        datetime = datetimeFormat.format(new Date());
+
+        fileName = file.getOriginalFilename();
+        this.file = file;
         authentication = SecurityContextHolder.getContext().getAuthentication();
     }
 
     public String OriginalUpload(MultipartFile file) {
-        fileName = file.getOriginalFilename();
-        this.file = file;
-        fileObjKeyName = authentication.getName()+"/original/"+fileName;
+        init(file);
+
+        fileObjKeyName = authentication.getName()+"/original/"+date+"/"
+                +FilenameUtils.getBaseName(fileName)+datetime+FilenameUtils.getExtension(fileName);
+
+        return upload();
+    }
+
+    public String SageMakerUpload(MultipartFile file) {
+        init(file);
+
+        fileObjKeyName = authentication.getName()+"/sagemaker/"+date+"/"
+                +FilenameUtils.getBaseName(fileName)+datetime+FilenameUtils.getExtension(fileName);
+
+        return upload();
+    }
+
+    public String RekognitionUpload(MultipartFile file) {
+        init(file);
+
+        fileObjKeyName = authentication.getName()+"/rekognition/"+date+"/"
+                +FilenameUtils.getBaseName(fileName)+datetime+FilenameUtils.getExtension(fileName);
 
         return upload();
     }
@@ -60,6 +99,6 @@ public class S3 {
             return "FileStreamFail";
         }
 
-        return s3Client.getUrl(bucketName, fileObjKeyName).toString();
+        return fileObjKeyName;
     }
 }

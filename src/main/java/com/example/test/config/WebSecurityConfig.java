@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // 2
             .logoutSuccessUrl("/login") // 로그아웃 성공시 리다이렉트 주소
 	    .invalidateHttpSession(true) // 세션 날리기
     ;
-//    http.csrf().disable();
+    http.csrf().disable();
   }
 
   @Override
