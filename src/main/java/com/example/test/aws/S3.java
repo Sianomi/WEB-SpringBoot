@@ -10,12 +10,13 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 
-
+@Service
 public class S3 {
     private AmazonS3 s3Client;
     private Regions clientRegion;

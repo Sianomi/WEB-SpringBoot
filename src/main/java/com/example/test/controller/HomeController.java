@@ -1,31 +1,27 @@
 package com.example.test.controller;
 
+import com.example.test.service.HomeService;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.Authentication;
-import com.example.test.dao.UserDAO;
-
+@RequiredArgsConstructor
 @Controller
 public class HomeController {
+
+	private final HomeService homeService;
+
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
 	}
 
 	@RequestMapping("/")
-	public String main(Model model)
-	{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Object principal = auth.getPrincipal();
-		String name = "";
-		if(principal != null && principal instanceof UserDAO){
-			model.addAttribute("name", ((UserDAO)principal).getName());
-			model.addAttribute("auth", ((UserDAO)principal).getAuth());
-		}
-		return "main";
+	public String main(Model model) {
+		return homeService.getAuth(model);
 	}
 
 	@RequestMapping("/admin")
