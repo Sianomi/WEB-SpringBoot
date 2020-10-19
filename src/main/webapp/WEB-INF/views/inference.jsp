@@ -12,7 +12,7 @@
     <link href="/css/main.css" rel="stylesheet">
 </head>
 <body>
-<script src="/js/main.js"></script>
+<script src="/js/inference.js"></script>
 <h2>추론 페이지</h2>
 ${name}님, 안녕하십니까. 오늘도 좋은 하루 되세요!
 <form id="logout" action="/logout" method="POST">

@@ -24,38 +24,30 @@ public class RequestService {
 
     public RequestService() {
         Map<String, String> result = new HashMap<>();
-        result.put("sagemaker","");
-        result.put("rekognition","");
+        result.put("result","");
         this.result = result;
         s3 = new S3();
     }
 
-    private void init(MultipartFile request){
+    public String OriginalS3Upload(MultipartFile request){
         if(!request.isEmpty())
         {
             mpf = request;
             String OriginalFilename = mpf.getOriginalFilename();
             System.out.println(OriginalFilename +" uploaded!");
-//            System.out.println(s3.OriginalUpload(mpf));
+            return s3.OriginalUpload(mpf);
         }
+        return "";
     }
 
-    public String getInferenceImage(MultipartFile request, int solution) throws IOException {
-        init(request);
-        switch (solution){
-            case 1:
-                result.put("sagemaker",SageMaker.predict(mpf));
-                break;
-            case 2:
-                //rekognition 추론 입력 부분
-                break;
-            case 3:
-                result.put("sagemaker",SageMaker.predict(mpf));
-                //rekogniton 추론 입력 부분
-                break;
-            default:
-                //에러처리
-        }
+    public String getSagemakerInferenceImage(String originalS3path) throws IOException {
+        // SageMaker 추론 입력 및 결과
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(result);
+    }
+
+    public String getRekognitionInferenceImage(String originalS3path) throws IOException {
+        // Rekognition 추론 입력 및 결과
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(result);
     }

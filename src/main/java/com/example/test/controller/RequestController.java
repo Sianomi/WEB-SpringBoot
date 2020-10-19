@@ -20,14 +20,36 @@ import java.util.*;
 @Controller
 @RequiredArgsConstructor
 public class RequestController {                                                            // 처리 요청을 받기 위한 RequestController
+
     private final RequestService requestService;                                            // 실제 처리를 위한 RequestService
+    private final S3 s3;
+    private String fileObjKeyName;
 
-    @PostMapping(value = "/infer", produces = MediaType.IMAGE_JPEG_VALUE)
+    @PostMapping(value = "/originals3")
     @ResponseBody
-    public String Inference(Model model,
-                             @RequestParam("filedata") MultipartFile request,
-                             @RequestParam("solution") int solution) throws IOException {
+    public int OriginalS3Upload(Model model,
+                                @RequestParam("filedata") MultipartFile request,
+                                @RequestParam("solution") int solution) throws IOException {
+        try {
+            fileObjKeyName = requestService.OriginalS3Upload(request);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return 1;
+    }
 
-        return requestService.getInferenceImage(request, solution);
+    @PostMapping(value = "/sagemaker", produces = MediaType.IMAGE_JPEG_VALUE)
+    @ResponseBody
+    public String InferenceSagemaker(Model model) throws IOException {
+        System.out.println(fileObjKeyName);
+        return "test";
+    }
+
+    @PostMapping(value = "/rekognition", produces = MediaType.IMAGE_JPEG_VALUE)
+    @ResponseBody
+    public String InferenceRekognition(Model model) throws IOException {
+        System.out.println(fileObjKeyName);
+        return "test";
     }
 }
