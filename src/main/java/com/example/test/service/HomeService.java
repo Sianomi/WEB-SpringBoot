@@ -15,7 +15,7 @@ public class HomeService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Object principal = auth.getPrincipal();
         String name = "";
-        if(principal != null && principal instanceof UserDAO){
+        if(principal != null && principal instanceof UserDAO) {
             model.addAttribute("name", ((UserDAO)principal).getName());
             model.addAttribute("auth", ((UserDAO)principal).getAuth());
         }
