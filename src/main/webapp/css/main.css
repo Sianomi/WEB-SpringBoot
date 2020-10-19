@@ -11,7 +11,7 @@ h2 {
   justify-content: space-evenly;
   width: inherit;
   height: inherit;
-  background-color: #eee
+  background-color: #13264E
 }
 
 li {
@@ -26,10 +26,10 @@ button {
   cursor: pointer;
   font-weight: 600;
   letter-spacing: normal;
-  background-color: #eee;
-  border-color: #eee;
+  background-color: #13264E;
+  border-color: #13264E;
   border-style: none;
-  color: #4c4c4c;
+  color: #ED7014;
   text-decoration: none;
   font-size: 25px;
   font-family: Arial,x-locale-body,sans-serif;
@@ -57,4 +57,16 @@ p {
     margin: 4px;
     cursor: pointer;
     border-radius:10px;
+}
+
+table {
+    border: 2px solid;
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid;
+}
+th {
+    background-color: #eee;
 }

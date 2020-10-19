@@ -24,7 +24,7 @@
   <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required><br>
-  <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-bottom: 3px;">Sign in</button><br>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-bottom: 3px;">Sign in</button>
    <button type="button" class="btn btn-secondary btn-large form-control"
             id="btn_joinForm" onClick="location.href='/signup'">Sign Up</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2020 Project: Board Recognition</p>
