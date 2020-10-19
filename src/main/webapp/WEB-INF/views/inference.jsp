@@ -32,7 +32,7 @@ ${name}님, 안녕하십니까. 오늘도 좋은 하루 되세요!
         <option value=3>Both</option>
     </select>
 </form>
-<input type="button" value="추론" id="file"  class="inference-start"//>
+<input type="button" value="추론" id="file" class="inference-start">
 <div>
     <div id="image_container" style="display: inline-block;vertical-align: top;">
         <h3 id="originalImageText"></h3>
