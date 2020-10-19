@@ -1,5 +1,7 @@
 h2 {
-  display: inline;
+    display: block;
+    width: 100%;
+    border-bottom: 2px solid;
 }
 
 .top-menu{

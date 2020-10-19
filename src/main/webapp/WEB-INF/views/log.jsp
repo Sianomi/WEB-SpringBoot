@@ -20,9 +20,8 @@
 </head>
 <body>
     <script src="/js/main.js"></script>
-    <h2 style="width: 220px; margin: 0;">사용기록 확인 페이지</h2>
-    ID : ${name}
-    소유 권한 : ${auth}
+    <h2>사용기록 확인 페이지</h2>
+    ${name}님, 안녕하십니까. 오늘도 좋은 하루 되세요!
     <form id="logout" action="/logout" method="POST">
         <sec:csrfInput />
         <input type="submit" value="로그아웃"/>
