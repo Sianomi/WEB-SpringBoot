@@ -1,0 +1,58 @@
+h2 {
+  display: inline;
+}
+
+.top-menu{
+  position: relative;
+  top: inherit;
+  display: flex;
+  justify-content: space-evenly;
+  width: inherit;
+  height: inherit;
+  background-color: #eee
+}
+
+li {
+  display: inline;
+}
+
+form {
+  display: inline;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: normal;
+  background-color: #eee;
+  border-color: #eee;
+  border-style: none;
+  color: #4c4c4c;
+  text-decoration: none;
+  font-size: 25px;
+  font-family: Arial,x-locale-body,sans-serif;
+  font-style: normal;
+}
+
+.file {
+  width: 250px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.inference-start {
+    width:170px;
+    background-color: #6610f2;
+    border: none;
+    color:#fff;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius:10px;
+}

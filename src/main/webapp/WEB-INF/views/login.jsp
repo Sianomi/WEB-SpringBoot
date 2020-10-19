@@ -18,16 +18,16 @@
   <body class="text-center">
     <form class="form-signin" action="/login" method="post">
         <sec:csrfInput />
-  <img class="mb-4" src="../../bootstrap/brand/AWS-logo.svg" alt="" width="144" height="144">
+  <img class="mb-4" src="../../bootstrap/brand/logo.svg" alt="" width="300" height="144">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
   <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required><br>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-bottom: 3px;">Sign in</button><br>
    <button type="button" class="btn btn-secondary btn-large form-control"
             id="btn_joinForm" onClick="location.href='/signup'">Sign Up</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+  <p class="mt-5 mb-3 text-muted">&copy; 2020 Project: Board Recognition</p>
 </form>
 </body>
 </html>
