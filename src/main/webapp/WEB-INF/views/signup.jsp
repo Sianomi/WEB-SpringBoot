@@ -18,7 +18,7 @@
 <body class="text-center">
 <form class="form-signin" th:action="@{/signup}" method="post" accept-charset="utf-8">
   <sec:csrfInput />
-  <img class="mb-4" src="/bootstrap/brand/AWS-logo.svg" alt="" width="144" height="144">
+  <img class="mb-4" src="/bootstrap/brand/logo.svg" alt="" width="300" height="144">
   <h1 class="h3 mb-3 font-weight-normal">Go sign Up</h1>
 
   <label for="inputEmail" class="sr-only">Email address</label>
@@ -34,10 +34,10 @@
   <label for="inputNumber" class="sr-only">Name</label>
   <input type="text" id="inputNumber" name="phonenumber" class="form-control" placeholder="PhoneNumber" required><br>
 
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button><br>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-bottom: 3px;">Sign Up</button>
   <button type="button" class="btn btn-secondary btn-large form-control"
           id="btn_joinForm" onClick="location.href='/login'">Sign in</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+  <p class="mt-5 mb-3 text-muted">&copy; 2020 Project: Board Recognition</p>
 </form>
 </body>
 </html>
