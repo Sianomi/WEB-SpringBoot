@@ -25,24 +25,6 @@
         <li><button type="button" id="Inference" class="top-entry-container" onClick="location.href='/inference.jsp'">Inference</button></li>
         <li><button type="button" id="Log" class="top-entry-container" onClick="location.href='/log.jsp'">Log</button></li>
     </ul>
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="fileId" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>
-        <select id="solution" name="solution">
-            <option value=1>SageMaker</option>
-            <option value=2>Rekognition</option>
-            <option value=3>Both</option>
-        </select>
-    </form>
-    <input type="button" value="추론" id="file"  class="inference-start"//>
-    <div>
-        <div id="image_container" style="display: inline-block;vertical-align: top;">
-            <h3 id="originalImageText"></h3>
-            <img src="" width="800" id="originalImage">
-        </div>
-        <div id="image_infer_container" style="display: inline-block">
-            <h3 id="inferImageText"></h3>
-            <img src="" id="inferImage">
-        </div>
-    </div>
+
 </body> 
 </html>
