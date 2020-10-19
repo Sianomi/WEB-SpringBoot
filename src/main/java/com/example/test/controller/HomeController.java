@@ -24,9 +24,9 @@ public class HomeController {
 		return homeService.getAuth(model);
 	}
 
-	@RequestMapping("/admin")
+	@RequestMapping("/infer")
 	public String admin()
 	{
-		return "admin";
+		return "inference";
 	}
 }

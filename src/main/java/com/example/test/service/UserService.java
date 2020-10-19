@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
@@ -18,7 +20,7 @@ public class UserService implements UserDetailsService {
 	private final UserRepository userRepository;
 
 	public String save(UserDTO infoDto) {
-		if(userRepository.findByeID(infoDto.getEID())!=null){
+		if(userRepository.findByeID(infoDto.getEID()).isPresent()){
 			return "redirect:/signup";
 		}
 		else {
