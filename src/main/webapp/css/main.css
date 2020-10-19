@@ -70,3 +70,8 @@ th, td {
 th {
     background-color: #eee;
 }
+
+em {
+    font-style: italic;
+    color: blue;
+}
