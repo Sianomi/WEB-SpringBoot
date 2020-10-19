@@ -10,30 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
 @Controller
-public class HomeController {
+public class HomeController {						// HomeController
 
-	private final HomeService homeService;
+	private final HomeService homeService;			// 요청을 처리하기 위한 HomeService
 
-	@RequestMapping("/login")
+	@RequestMapping("/login")						// GET Request '/login' path Mapping
 	public String login() {
 		return "login";
+	}		// return login.jsp
+
+	@RequestMapping("/")							// GET Request '/' path Mapping
+	public String main(Model model) {				// Model variable 매개변수
+		homeService.getAuth(model);					// 인증정보 Model 저장
+		return "main";								// return main.jsp
 	}
 
-	@RequestMapping("/")
-	public String main(Model model) {
-		homeService.getAuth(model);
-		return "main";
+	@RequestMapping("/infer")						// GET Request '/infer' path Mapping
+	public String inferhome(Model model) {			// Model variable 매개변수
+		homeService.getAuth(model);					// 인증정보 Model 저장
+		return "inference";							// return inference.jsp
 	}
 
-	@RequestMapping("/infer")
-	public String inferhome(Model model) {
-		homeService.getAuth(model);
-		return "inference";
-	}
-
-	@RequestMapping("/log")
-	public String log(Model model) {
-		homeService.getAuth(model);
-		return "log";
+	@RequestMapping("/log")							// GET Request '/log' path Mapping
+	public String log(Model model) {				// Model variable 매개변수
+		homeService.getAuth(model);					// 인증정보 Model 저장
+		return "log";								// return log.jsp
 	}
 }

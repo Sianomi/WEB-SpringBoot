@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jin
-  Date: 2020-10-19
-  Time: 오후 2:00
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>

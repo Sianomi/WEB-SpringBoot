@@ -19,8 +19,8 @@ import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
-public class RequestController {
-    private final RequestService requestService;
+public class RequestController {                                                            // 처리 요청을 받기 위한 RequestController
+    private final RequestService requestService;                                            // 실제 처리를 위한 RequestService
 
     @PostMapping(value = "/infer", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody

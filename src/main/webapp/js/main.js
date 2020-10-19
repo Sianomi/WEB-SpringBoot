@@ -21,7 +21,7 @@ $(document).ready(function() {
         var headers= {};
         headers[csrfHeader] = csrfToken;
 
-        var form = new FormData(document.getElementById('uploadForm'))
+        var form = new FormData(document.getElementById('uploadForm'));
 
         $.ajax({
             type: "POST",

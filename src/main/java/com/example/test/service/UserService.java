@@ -4,13 +4,18 @@ import com.example.test.repository.UserRepository;
 import com.example.test.dto.UserDTO;
 import com.example.test.dao.UserDAO;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -18,10 +23,12 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
 	
 	private final UserRepository userRepository;
+	private Map<String, String> result = new HashMap<>();
 
-	public String save(UserDTO infoDto) {
+	public String save(Model model, UserDTO infoDto) throws JsonProcessingException {
 		if(userRepository.findByeID(infoDto.getEID()).isPresent()){
-			return "redirect:/signup";
+			result.put("msg","중복된 이메일입니다.\n다른 이메일을 사용해주세요.");
+			result.put("url","/signup");
 		}
 		else {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -33,13 +40,16 @@ public class UserService implements UserDetailsService {
 				.password(infoDto.getPassword())
 				.phonenumber(infoDto.getPhonenumber())
 				.name(infoDto.getName()).build()).getCode();
-			return "redirect:/login";
+			result.put("msg","가입되셨습니다.\n로그인부탁드립니다.");
+			result.put("url","/login");
 		}
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(result);
 	}
 
 
-	@Override // 기본적인 반환 타입은 UserDetails, UserDetails를 상속받은 User로 반환 타입 지정 (자동으로 다운 캐스팅됨)
-		public UserDAO loadUserByUsername(String eID) throws UsernameNotFoundException { // 시큐리티에서 지정한 서비스이기 때문에 이 메소드를 필수로 구현
-		return userRepository.findByeID(eID).orElseThrow(() -> new UsernameNotFoundException((eID)));
+	@Override
+	public UserDAO loadUserByUsername(String eID) throws UsernameNotFoundException {
+	return userRepository.findByeID(eID).orElseThrow(() -> new UsernameNotFoundException((eID)));
 	}
 }
