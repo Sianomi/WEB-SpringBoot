@@ -21,12 +21,19 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String main(Model model) {
-		return homeService.getAuth(model);
+		homeService.getAuth(model);
+		return "main";
 	}
 
 	@RequestMapping("/infer")
-	public String admin()
-	{
+	public String inferhome(Model model) {
+		homeService.getAuth(model);
 		return "inference";
+	}
+
+	@RequestMapping("/log")
+	public String log(Model model) {
+		homeService.getAuth(model);
+		return "log";
 	}
 }

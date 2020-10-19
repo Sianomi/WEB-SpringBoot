@@ -28,9 +28,9 @@
         <input type="submit" value="로그아웃"/>
     </form>
     <ul class="top-menu">
-        <li><button type="button" id="Home" class="top-entry-container" onClick="location.href='/main.jsp'">Home</button></li>
-        <li><button type="button" id="Inference" class="top-entry-container" onClick="location.href='/inference.jsp'">Inference</button></li>
-        <li><button type="button" id="Log" class="top-entry-container" onClick="location.href='/log.jsp'">Log</button></li>
+        <li><button type="button" id="Home" class="top-entry-container" onClick="location.href='/'">Home</button></li>
+        <li><button type="button" id="Inference" class="top-entry-container" onClick="location.href='/infer'">Inference</button></li>
+        <li><button type="button" id="Log" class="top-entry-container" onClick="location.href='/log'">Log</button></li>
     </ul>
 
 </body>

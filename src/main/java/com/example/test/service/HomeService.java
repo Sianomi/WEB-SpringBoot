@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 
 @Service
 public class HomeService {
-    public String getAuth(Model model) {
+    public void getAuth(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Object principal = auth.getPrincipal();
         String name = "";
@@ -19,6 +19,5 @@ public class HomeService {
             model.addAttribute("name", ((UserDAO)principal).getName());
             model.addAttribute("auth", ((UserDAO)principal).getAuth());
         }
-        return "main";
     }
 }
