@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
 @Controller
@@ -14,10 +15,10 @@ public class HomeController {						// HomeController
 
 	private final HomeService homeService;			// 요청을 처리하기 위한 HomeService
 
-	@GetMapping("/login")							// GET Request '/login' path Mapping
+	@RequestMapping("/login")						// GET Request '/login' path Mapping
 	public String login() {
-		return "login";
-	}		// return login.jsp
+		return "login"; 							// return login.jsp
+	}
 
 	@GetMapping("/")								// GET Request '/' path Mapping
 	public String main(Model model) {				// Model variable 매개변수

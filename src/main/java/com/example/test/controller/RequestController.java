@@ -42,14 +42,14 @@ public class RequestController {                                                
     @PostMapping(value = "/sagemaker", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
     public String InferenceSagemaker(Model model) throws IOException {
-        System.out.println(fileObjKeyName);
+
         return "test";
     }
 
     @PostMapping(value = "/rekognition", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
     public String InferenceRekognition(Model model) throws IOException {
-        System.out.println(fileObjKeyName);
+
         return "test";
     }
 }
