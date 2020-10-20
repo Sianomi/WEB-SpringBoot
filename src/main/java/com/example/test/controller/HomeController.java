@@ -35,6 +35,7 @@ public class HomeController {						// HomeController
 	@GetMapping("/log")								// GET Request '/log' path Mapping
 	public String log(Model model) {				// Model variable 매개변수
 		homeService.getAuth(model);					// 인증정보 Model 저장
+		homeService.getLog(model);
 		return "log";								// return log.jsp
 	}
 }
