@@ -25,22 +25,25 @@ ${name}님, 안녕하십니까. 오늘도 좋은 하루 되세요!
     <li><button type="button" id="Log" class="top-entry-container" onClick="location.href='/log'">Log</button></li>
 </ul>
 <form id="uploadForm" enctype="multipart/form-data">
-    <input type="file" id="fileId" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>
+    <input type="file" id="fileId" class="fileselect" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>
     <select id="solution" name="solution">
         <option value=1>SageMaker</option>
         <option value=2>Rekognition</option>
         <option value=3>Both</option>
     </select>
 </form>
-<input type="button" value="추론" id="file" class="inference-start">
+<input type="button" value="추론" id="file" class="inference-start"><br>
+<h3>원본이미지</h3><h3>추론이미지</h3>
 <div>
-    <div id="image_container" style="display: inline-block;vertical-align: top;">
-        <h3 id="originalImageText"></h3>
-        <img src="" width="800" id="originalImage">
+    <div id="image_container" style="display: inline;vertical-align: top;">
+        <div class="attachment">
+            <img src="" width="800" id="originalImage">
+        </div>
     </div>
-    <div id="image_infer_container" style="display: inline-block">
-        <h3 id="inferImageText"></h3>
-        <img src="" id="inferImage">
+    <div id="image_infer_container" style="display: inline;">
+        <div class="attachment">
+            <img src="" id="inferImage">
+        </div>
     </div>
 </div>
 </body>
