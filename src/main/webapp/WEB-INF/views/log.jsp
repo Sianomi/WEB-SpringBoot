@@ -10,30 +10,48 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>Log</title>
     <sec:csrfMetaTags />
-    <link href="/css/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/assets/vendor/line-awesome/css/line-awesome.min.css" rel="stylesheet">
+    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/css/log.css" rel="stylesheet">
 </head>
-<body>
-    <h2>사용기록 확인 페이지</h2>
-    ${name}님, 안녕하십니까. 오늘도 좋은 하루 되세요!
-    <form id="logout" action="/logout" method="POST">
-        <sec:csrfInput />
-        <input type="submit" value="로그아웃"/>
-    </form>
-    <ul class="top-menu">
-        <li><button type="button" id="Home" class="top-entry-container" onClick="location.href='/'">Home</button></li>
-        <li><button type="button" id="Inference" class="top-entry-container" onClick="location.href='/infer'">Inference</button></li>
-        <li><button type="button" id="Log" class="top-entry-container" onClick="location.href='/log'">Log</button></li>
-    </ul>
-    <table>
-        <th>Bucket Name</th>
-        <th>E-mail ID</th>
-        <th>Inference Image Path</th>
-        <th>Original Image Path</th>
-        <th>Used Service</th>
-        <th>Result</th>
-        <th>Used Time</th>
+<body id="logbody">
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <a href="/" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class=""><a href="/">Home</a></li>
+                    <li class=""><a href="/infer">Inference</a></li>
+                    <li class="active"><a href="/log">Log</a></li>
+                    <li class=""><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section></section>
+    <table class="table table-responsive-xl">
+        <thead class="bg-light">
+            <th>Bucket Name</th>
+            <th>E-mail ID</th>
+            <th>Inference Image Path</th>
+            <th>Original Image Path</th>
+            <th>Used Service</th>
+            <th>Result</th>
+            <th>Used Time</th>
+        </thead>
         <c:forEach var="log" items="${logList}">
-            <tr>
+            <tr class="bg-info text-white">
                 <td>${log.getBucketname()}</td>
                 <td>${log.getEID()}</td>
                 <td>${log.inferimagepath}</td>
@@ -44,5 +62,16 @@
             </tr>
         </c:forEach>
     </table>
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="/assets/vendor/php-email-form/validate.js"></script>
+    <script src="/assets/vendor/venobox/venobox.min.js"></script>
+    <script src="/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="/assets/vendor/counterup/counterup.min.js"></script>
+    <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>

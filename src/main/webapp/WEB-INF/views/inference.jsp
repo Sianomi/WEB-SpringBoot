@@ -9,42 +9,66 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>Inference</title>
     <sec:csrfMetaTags />
-    <link href="/css/main.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/assets/vendor/line-awesome/css/line-awesome.min.css" rel="stylesheet">
+    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/css/inference.css" rel="stylesheet">
 </head>
 <body>
 <script src="/js/inference.js"></script>
-<h2>추론 페이지</h2>
-${name}님, 안녕하십니까. 오늘도 좋은 하루 되세요!
-<form id="logout" action="/logout" method="POST">
-    <sec:csrfInput />
-    <input type="submit" value="로그아웃"/>
-</form>
-<ul class="top-menu">
-    <li><button type="button" id="Home" class="top-entry-container" onClick="location.href='/'">Home</button></li>
-    <li><button type="button" id="Inference" class="top-entry-container" onClick="location.href='/infer'">Inference</button></li>
-    <li><button type="button" id="Log" class="top-entry-container" onClick="location.href='/log'">Log</button></li>
-</ul>
-<form id="uploadForm" enctype="multipart/form-data">
-    <input type="file" id="fileId" class="fileselect" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>
-    <select id="solution" name="solution">
-        <option value=1>SageMaker</option>
-        <option value=2>Rekognition</option>
-        <option value=3>Both</option>
-    </select>
-</form>
-<input type="button" value="추론" id="file" class="inference-start"><br>
-<h3>원본이미지</h3><h3>추론이미지</h3>
-<div>
-    <div id="image_container" style="display: inline;vertical-align: top;">
-        <div class="attachment">
-            <img src="" width="800" id="originalImage">
-        </div>
+<body id="inference_body">
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+        <a href="/" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                <li class=""><a href="/">Home</a></li>
+                <li class="active"><a href="/infer">Inference</a></li>
+                <li class=""><a href="/log">Log</a></li>
+                <li class=""><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
     </div>
-    <div id="image_infer_container" style="display: inline;">
-        <div class="attachment">
-            <img src="" id="inferImage">
-        </div>
+</header>
+<section></section>
+<main id="inference_main" >
+    <form id="uploadForm" enctype="multipart/form-data" class="col-lg-6">
+        <input type="file" id="fileId" class="fileselect col-xl-5" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>
+        <select id="solution" name="solution" class="col-xl-2 col-md-6">
+            <option value=1>SageMaker</option>
+            <option value=2>Rekognition</option>
+            <option value=3>Both</option>
+        </select>
+    </form>
+    <input type="button" value="추론" id="file" class="btn btn-primary col-md-1 col-xl-1"><br>
+    <div id="Oritext" class="row">
+        <h1 class="col">원본이미지</h1>
     </div>
-</div>
+    <div class="text-center">
+            <img src="" class="img-thumbnail " id="originalImage">
+    </div>
+</main>
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+<script src="/assets/vendor/venobox/venobox.min.js"></script>
+<script src="/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="/assets/vendor/counterup/counterup.min.js"></script>
+<script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html>
   <head>
@@ -12,15 +13,15 @@
     <sec:csrfMetaTags />
     <title>로그인</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="/css/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
   <form class="form-signin" action="/login" method="post" id="signin" name="signin">
     <sec:csrfInput />
-    <img class="mb-4" src="/bootstrap/brand/logo.svg" alt="" width="300" height="144">
+    <img class="mb-4" src="/assets/img/logo.svg" alt="" width="300" height="144">
     <h1 class="h3 mb-3 font-weight-normal">로그인</h1>
 
     <label for="inputEmail" class="sr-only">Email address</label>

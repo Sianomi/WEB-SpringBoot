@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {           
 
   @Override
   public void configure(WebSecurity web) {                                                    // Security Config
-    web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/bootstrap/**");   // 인증정보가 없어도 접근할 수 있는 PATH 선언
+    web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/assets/**");   // 인증정보가 없어도 접근할 수 있는 PATH 선언
   }
 
   @Override

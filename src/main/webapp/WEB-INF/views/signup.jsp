@@ -12,10 +12,8 @@
     <sec:csrfMetaTags />
     <title>회원가입</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
     <link href="/css/signin.css" rel="stylesheet">
   </head>
 
@@ -23,7 +21,7 @@
     <script src="/js/signup.js" charset="utf-8"></script>
     <form class="form-signin" accept-charset="utf-8" th:action="@{/signup}" method="post" id="signup" name="signup" onsubmit="return false;">
       <sec:csrfInput />
-      <img class="mb-4" src="/bootstrap/brand/logo.svg" alt="" width="300" height="144">
+      <img class="mb-4" src="/assets/img/logo.svg" alt="" width="300" height="144">
       <h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
 
       <label for="inputEmail" class="sr-only">Email address</label>

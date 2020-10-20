@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,7 +37,7 @@ public class RequestService {
         s3 = new S3();
     }
 
-    public String OriginalS3Upload(MultipartFile request){
+    public String OriginalS3Upload(MultipartFile request) throws FileNotFoundException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDAO principal = (UserDAO) auth.getPrincipal();
         logger.info("Try Original Image S3 Upload. Email : " + principal.getEID());
@@ -48,7 +49,7 @@ public class RequestService {
             return s3.OriginalUpload(mpf);
         }
         logger.error("Can't Receive Original Image File. Email : " + principal.getEID());
-        return "";
+        throw new FileNotFoundException();
     }
 
     public String getSagemakerInferenceImage(String originalS3path) throws IOException {

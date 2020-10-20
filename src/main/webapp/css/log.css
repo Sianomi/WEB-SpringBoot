@@ -1,0 +1,23 @@
+#logbody{
+
+    /* The image used */
+    background-image: url("/assets/img/counts-bg-blur.jpg");
+
+    /* Full height */
+    height: 1080px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+table, thead, tr, tbody, th, td {
+    text-align: center;
+}
+
+.table td {
+    text-align: center;
+}
