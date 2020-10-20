@@ -34,7 +34,7 @@
       </span>
     </c:if>
     <br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-bottom: 3px;" id="signinbutton">Sign in</button><br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-bottom: 5px;" id="signinbutton">Sign in</button>
 
     <button type="button" class="btn btn-secondary btn-large form-control"
             id="btn_joinForm" onClick="location.href='/signup'">Sign Up</button>
