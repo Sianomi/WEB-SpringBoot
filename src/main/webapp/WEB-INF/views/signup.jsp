@@ -38,7 +38,7 @@
       <label for="inputNumber" class="sr-only">phonenumber</label>
       <input type="text" id="inputNumber" name="phonenumber" class="form-control" placeholder="PhoneNumber" required numberOnly><br>
 
-      <button class="btn btn-lg btn-primary btn-block" type="submit" id="signup-button">Sign Up</button><br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-bottom: 5px;" id="signup-button">Sign Up</button>
       <button type="button" class="btn btn-secondary btn-large form-control"
               id="btn_joinForm" onClick="location.href='/login'">Sign in</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
