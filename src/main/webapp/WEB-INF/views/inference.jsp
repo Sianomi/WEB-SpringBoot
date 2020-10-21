@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-12 col-sm-12">
-                    <h1 id="Oritext">원본이미지</h1>
+                    <h1 id="Oritext"></h1>
                     <img src="" alt="" class="img-fluid img-thumbnail" id="originalImage">
                 </div>
             </div>

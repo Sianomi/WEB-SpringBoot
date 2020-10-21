@@ -3,7 +3,7 @@ function setThumbnail(event)
     var reader = new FileReader();
     reader.onload = function(event)
     {
-        $("#originalImageText").text("원본 이미지");
+        $("#Oritext").text("원본이미지");
         $("#originalImage").attr("src", event.target.result);
 
         $("#inferImageText").text("");
