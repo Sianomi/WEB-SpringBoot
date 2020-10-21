@@ -12,7 +12,7 @@
     <sec:csrfMetaTags />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
 
-    
+
     <script src="/assets/vendor/js/bootstrap.min.js"></script>
 
     <!-- Vendor CSS Files -->

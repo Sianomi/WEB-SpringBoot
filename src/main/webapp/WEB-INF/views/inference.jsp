@@ -41,23 +41,49 @@
         </nav>
     </div>
 </header>
-<section></section>
+<section>
+    <section class="banner-area relative">
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+            <div id="inference_section" class="row fullscreen align-items-center d-flex">
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="banner-content">
+                        <form id="uploadForm" enctype="multipart/form-data" class="">
+                            <input type="file" id="fileId" class="fileselect col-lg-12" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>
+                            <select id="solution" name="solution" class="col-lg-7 col-md-12">
+                                <option value=1>SageMaker</option>
+                                <option value=2>Rekognition</option>
+                                <option value=3>Both</option>
+                            </select>
+                        </form>
+                        <input type="button" value="추론" id="file" class="btn btn-primary col-lg-2 col-sm-12"><br>
+                        <p id="explaintext">Detect Our New Image.</p>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-12 col-sm-12">
+                    <h1 id="Oritext">원본이미지</h1>
+                    <img src="" alt="" class="img-fluid img-thumbnail" id="originalImage">
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
 <main id="inference_main" >
-    <form id="uploadForm" enctype="multipart/form-data" class="col-lg-6">
-        <input type="file" id="fileId" class="fileselect col-xl-5" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>
-        <select id="solution" name="solution" class="col-xl-2 col-md-6">
-            <option value=1>SageMaker</option>
-            <option value=2>Rekognition</option>
-            <option value=3>Both</option>
-        </select>
-    </form>
-    <input type="button" value="추론" id="file" class="btn btn-primary col-md-1 col-xl-1"><br>
-    <div id="Oritext" class="row">
-        <h1 class="col">원본이미지</h1>
-    </div>
-    <div class="text-center">
-            <img src="" class="img-thumbnail " id="originalImage">
-    </div>
+<%--    <form id="uploadForm" enctype="multipart/form-data" class="col-lg-6">--%>
+<%--        <input type="file" id="fileId" class="fileselect col-xl-5" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>--%>
+<%--        <select id="solution" name="solution" class="col-xl-2 col-md-6">--%>
+<%--            <option value=1>SageMaker</option>--%>
+<%--            <option value=2>Rekognition</option>--%>
+<%--            <option value=3>Both</option>--%>
+<%--        </select>--%>
+<%--    </form>--%>
+<%--    <input type="button" value="추론" id="file" class="btn btn-primary col-md-1 col-xl-1"><br>--%>
+<%--    <div id="Oritext" class="row">--%>
+<%--        <h1 class="col">원본이미지</h1>--%>
+<%--    </div>--%>
+<%--    <div class="text-center">--%>
+<%--            <img src="" class="img-thumbnail " id="originalImage">--%>
+<%--    </div>--%>
 </main>
 <!-- Vendor JS Files -->
 <script src="/assets/vendor/jquery/jquery.min.js"></script>

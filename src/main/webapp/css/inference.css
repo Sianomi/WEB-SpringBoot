@@ -24,6 +24,14 @@ form {
   width: 250px;
 }
 
+#fileID {
+    margin: 10px 5px 10px;
+}
+
+#solution{
+    margin: 10px 5px 10px;
+}
+
 p {
   font-size: 20px;
 }
@@ -105,8 +113,12 @@ select {
     background-color: #FFFFFF;
 }
 
-#Oritext h1 {
-    margin: 20px;
+#inference_section {
+    height: 910px;
+}
+
+#Oritext {
+    margin: 0px 0px 20px;
     font-size: 42px;
     font-weight: 700;
     line-height: 56px;
@@ -116,21 +128,26 @@ select {
 }
 
 #originalImage {
-    max-width: 80%;
+    max-width: 100%;
     max-height: 700px;
-    margin: 20px 0px 20px;
+    /*margin: 20px 0px 20px;*/
 }
 
-@media (max-width: 768px) {
-    #Oritext h1 {
+#explaintext{
+    margin:20px;
+    font-size:30px;
+}
+
+@media (max-width: 992px) {
+    #Oritext {
         font-size: 28px;
         line-height: 36px;
-    }
-    #Oritext h2 {
-        font-size: 18px;
-        line-height: 24px;
+        text-align: center;
     }
     #originalImage{
         max-width: 100%
+    }
+    #inference_section{
+        height: 610px;
     }
 }
