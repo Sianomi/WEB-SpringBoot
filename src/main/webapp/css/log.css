@@ -17,7 +17,18 @@
 table, thead, tr, tbody, th, td {
     text-align: center;
 }
+table{
+    width:100%;
+}
+#logtable_filter{
+    float:right;
+}
+#logtable_paginate{
+    float:right;
+}
+label {
+    display: inline-flex;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
 
-.table td {
-    text-align: center;
 }
