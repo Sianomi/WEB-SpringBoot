@@ -41,13 +41,12 @@ public class HomeService {
     public void getLog(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDAO principal = (UserDAO) auth.getPrincipal();
-
-        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by("timestamp").descending());
+        
         if(principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            List<InferLogDAO> test = inferLogRepository.findAll(pageRequest).getContent();
+            List<InferLogDAO> test = inferLogRepository.findAllByOrderByTimestampDesc();
             model.addAttribute("logList", test);
         } else {
-            List<InferLogDAO> test = inferLogRepository.findByeID(principal.getEID(), pageRequest).getContent();
+            List<InferLogDAO> test = inferLogRepository.findByeIDOrderByTimestampDesc(principal.getEID());
             model.addAttribute("logList", test);
         }
     }

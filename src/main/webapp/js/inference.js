@@ -180,6 +180,6 @@ function showResult(){
 
 function failInference(){
     if(!alert("추론에 실패했습니다.\n다시 시도해주십시오.")){
-        $("ModalUpload").modal('hide');
+        $("#ModalUpload").modal('hide');
     }
 }
