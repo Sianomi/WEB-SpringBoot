@@ -82,8 +82,8 @@ public class S3 {
 
     public String getByte64ImageFromS3(String s3Path) throws IOException {
         S3Object response = s3Client.getObject(new GetObjectRequest(bucketName, s3Path));
-
-        return ByteArraytoBase64(IOUtils.toByteArray(response.getObjectContent()), fileName);
+        String[] temp = s3Path.split("/");
+        return ByteArraytoBase64(IOUtils.toByteArray(response.getObjectContent()), temp[temp.length-1]);
     }
 
     private String upload() {                                                                 // S3 업로드 함수

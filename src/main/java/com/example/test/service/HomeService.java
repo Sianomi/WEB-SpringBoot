@@ -25,7 +25,6 @@ import java.util.List;
 public class HomeService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final InferLogRepository inferLogRepository;
 
     public void getAuth(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -35,19 +34,6 @@ public class HomeService {
             String Auth = ((UserDAO)principal).getAuth();
             model.addAttribute("name", userName);
             model.addAttribute("auth", Auth);;
-        }
-    }
-
-    public void getLog(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDAO principal = (UserDAO) auth.getPrincipal();
-        
-        if(principal.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            List<InferLogDAO> test = inferLogRepository.findAllByOrderByTimestampDesc();
-            model.addAttribute("logList", test);
-        } else {
-            List<InferLogDAO> test = inferLogRepository.findByeIDOrderByTimestampDesc(principal.getEID());
-            model.addAttribute("logList", test);
         }
     }
 }

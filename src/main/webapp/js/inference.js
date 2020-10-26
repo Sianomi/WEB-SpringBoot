@@ -42,7 +42,7 @@ $(document).ready(function() {
             cache: false,
             beforeSend: function () {
                 $("#ModalUpload").modal('show');
-                Init();
+                InferenceInit();
             }
         }).done(function (result) {
             if(result){
@@ -56,7 +56,7 @@ $(document).ready(function() {
     });
 });
 
-function Init() {
+function InferenceInit() {
     sageResult = "";
     rekogResult = "";
     checkSagemaker=0;

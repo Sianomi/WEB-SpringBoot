@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
 
 
-    <script src="/assets/vendor/js/bootstrap.min.js"></script>
+    <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Vendor CSS Files -->
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -46,32 +46,55 @@
     <section></section>
     <div class="container">
         <div class="row">
-        <table class="table table-striped table-bordered" id="logtable">
-            <thead class="bg-light">
-                <th>Bucket Name</th>
-                <th>E-mail ID</th>
-                <th>Inference Image Path</th>
-                <th>Original Image Path</th>
-                <th>Used Service</th>
-                <th>Result</th>
-                <th>Used Time</th>
-            </thead>
-            <tbody>
-            <c:forEach var="log" items="${logList}">
-                <tr class="bg-info text-white">
-                    <td>${log.getBucketname()}</td>
-                    <td>${log.getEID()}</td>
-                    <td>${log.inferimagepath}</td>
-                    <td>${log.originalimagepath}</td>
-                    <td>${log.usedservice}</td>
-                    <td>${log.result}</td>
-                    <td>${log.timestamp}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+            <table class="table table-striped table-bordered" id="logtable">
+                <thead class="bg-light">
+                    <th>E-mail ID</th>
+                    <th>Inference Image</th>
+                    <th>Original Image</th>
+                    <th>Used Service</th>
+                    <th>Result</th>
+                    <th>Used Time</th>
+                </thead>
+                <tbody>
+                <c:forEach var="log" items="${logList}">
+                    <tr class="bg-info text-white">
+                        <td>${log.getEID()}</td>
+                        <td><a class="btn" s3path="${log.inferimagepath}">Click</a></td>
+                        <td><a class="btn" s3path="${log.originalimagepath}">Click</a></td>
+                        <td>${log.usedservice}</td>
+                        <td>${log.result}</td>
+                        <td>${log.timestamp}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
     </div>
+
+    <form id="logForm">
+        <input type="hidden" name="s3path" id="inputs3path">
+    </form>
+
+    <div class="modal fade" id="ModalLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" id="ModalSize">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLogTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="ModalLogText"></div>
+                    <img id="LogImage" src="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/jquery/jquery.min.js"></script>
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
