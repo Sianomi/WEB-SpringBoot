@@ -5,10 +5,13 @@ import com.amazonaws.SdkClientException;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 import lombok.Getter;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 @Service
@@ -64,22 +68,22 @@ public class S3 {
         return upload();                                                                    // S3 Upload 함수 실행
     }
 
-    public String SageMakerUpload(MultipartFile file) {
-        init(file);
+    public String getSageMakerS3Path() {
 
-        fileObjKeyName = authentication.getName()+"/sagemaker/"+date+"/"
+        return authentication.getName()+"/sagemaker/"+date+"/"
                 +FilenameUtils.getBaseName(fileName)+datetime+FilenameUtils.getExtension(fileName);
-
-        return upload();
     }
 
-    public String RekognitionUpload(MultipartFile file) {
-        init(file);
+    public String getRekognitionS3Path() {
 
-        fileObjKeyName = authentication.getName()+"/rekognition/"+date+"/"
+        return authentication.getName()+"/rekognition/"+date+"/"
                 +FilenameUtils.getBaseName(fileName)+datetime+FilenameUtils.getExtension(fileName);
+    }
 
-        return upload();
+    public String getByte64ImageFromS3(String s3Path) throws IOException {
+        S3Object response = s3Client.getObject(new GetObjectRequest(bucketName, s3Path));
+
+        return ByteArraytoBase64(IOUtils.toByteArray(response.getObjectContent()), fileName);
     }
 
     private String upload() {                                                                 // S3 업로드 함수
@@ -100,5 +104,10 @@ public class S3 {
         }
 
         return fileObjKeyName;                                                                // Return S3 Key Path
+    }
+
+    private String ByteArraytoBase64(byte[] bytearray, String OriginalFilename) throws IOException {
+        String fileExtName = OriginalFilename.substring(OriginalFilename.lastIndexOf(".")+1);
+        return "data:image/"+ fileExtName +";base64, " + Base64.getEncoder().encodeToString(bytearray);
     }
 }

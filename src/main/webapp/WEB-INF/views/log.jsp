@@ -69,17 +69,6 @@
                 </tr>
             </c:forEach>
             </tbody>
-            <tfoot class="bg-light">
-                <tr>
-                    <th>Bucket Name</th>
-                    <th>E-mail ID</th>
-                    <th>Inference Image Path</th>
-                    <th>Original Image Path</th>
-                    <th>Used Service</th>
-                    <th>Result</th>
-                    <th>Used Time</th>
-                </tr>
-            </tfoot>
         </table>
         </div>
     </div>

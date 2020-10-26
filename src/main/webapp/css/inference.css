@@ -138,6 +138,21 @@ select {
     font-size:30px;
 }
 
+#rekogImage {
+    display: block;
+    width: 100%;
+}
+
+#sageImage {
+    display: block;
+    width: 100%;
+}
+
+#ModalInference h3{
+    text-align: center;
+}
+
+
 @media (max-width: 992px) {
     #Oritext {
         font-size: 28px;

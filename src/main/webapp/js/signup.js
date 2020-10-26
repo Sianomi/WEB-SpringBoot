@@ -6,10 +6,13 @@ $(document).ready(function() {
         var headers= {};
         headers[csrfHeader] = csrfToken;
 
-        if(document.signup.eID.value=="") {
+        var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+
+        if (!reg_email.test(document.signup.eID.value)) {
             document.formsignin.eID.focus();
             return;
-        } else if(document.signup.password.value==""){
+        }
+        else if(document.signup.password.value==""){
             document.formsignin.password.focus();
             return;
         } else if(document.signup.name.value==""){

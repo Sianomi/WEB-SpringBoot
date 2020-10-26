@@ -13,6 +13,13 @@ function setThumbnail(event)
     reader.readAsDataURL(event.target.files[0]);
 
 }
+
+var checkSagemaker = 0;
+var checkRekognition = 0;
+
+var sageResult = "";
+var rekogResult = "";
+
 $(document).ready(function() {
     $("#file").click(function () {
         var csrfParameter = $("meta[name='_csrf_parameter']").attr("content");
@@ -33,28 +40,55 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             cache: false,
+            beforeSend: function () {
+                $("#ModalUpload").modal('show');
+                Init();
+            }
         }).done(function (result) {
             if(result){
-                inference()
+                inference();
             } else {
-                alert("추론에 실패했습니다.\n다시 시도해주십시오.")
+                failUpload();
             }
-
-        });
+        }).fail(function (result){
+            failUpload();
+        })
     });
 });
 
-// var result = JSON.parse(result)
-// $("#inferImageText").text("추론 이미지");
-// $("#inferImage").attr("src", result.sagemaker);
+function Init() {
+    sageResult = "";
+    rekogResult = "";
+    checkSagemaker=0;
+    checkRekognition=0;
+    $("#sageText").text("");
+    $("#sageImage").attr("src", "");
+    $("#rekogText").text("");
+    $("#rekogImage").attr("src", "");
+
+    if($("#ModalSize").hasClass("modal-lg")) {
+        $("#ModalSize").removeClass("modal-lg");
+    }
+    if($("#ModalSize").hasClass("modal-xl")) {
+        $("#ModalSize").removeClass("modal-xl");
+    }
+}
+
+function failUpload(){
+    if(!alert("업로드에 실패했습니다.\n다시 시도해주십시오.")){
+        $("ModalUpload").modal('hide');
+    }
+}
 
 function inference() {
     var solution = $("#solution").val();
     switch (solution) {
         case "1":
             sagemaker();
+            checkRekognition=1;
             break;
         case "2":
+            checkSagemaker=1;
             rekognition();
             break;
         case "3":
@@ -78,8 +112,13 @@ function sagemaker(){
         processData: false,
         contentType: false,
         cache: false,
-    }).done(
-    );
+    }).done(function (result){
+        checkSagemaker=1;
+        sageResult = result;
+        showResult();
+    }).fail(function(){
+        failInference();
+    });
 }
 
 function rekognition(){
@@ -97,6 +136,50 @@ function rekognition(){
         processData: false,
         contentType: false,
         cache: false,
-    }).done(
-    );
+    }).done(function (result) {
+        checkRekognition=1;
+        rekogResult = result;
+        showResult();
+    }).fail(function(){
+        failInference();
+    });
+}
+
+function showResult(){
+    if(checkSagemaker && checkRekognition){
+        $("#ModalUpload").modal("hide");
+
+        var twiceCheck = 0;
+
+        if(this.sageResult) {
+            var sageResult = JSON.parse(this.sageResult);
+            $("#sageText").text("SageMaker");
+            $("#sageImage").attr("src", sageResult.result);
+            twiceCheck++;
+        }
+
+        if(this.rekogResult) {
+            var rekogResult = JSON.parse(this.rekogResult);
+            $("#rekogText").text("Rekognition");
+            $("#rekogImage").attr("src", rekogResult.result);
+            twiceCheck++;
+        }
+
+        if(twiceCheck>=2){
+            $("#ModalSize").addClass("modal-lg");
+        } else {
+            $("#ModalSize").addClass("modal-xl");
+        }
+
+        checkSagemaker=0;
+        checkRekognition=0;
+
+        $("#ModalInference").modal("show");
+    }
+}
+
+function failInference(){
+    if(!alert("추론에 실패했습니다.\n다시 시도해주십시오.")){
+        $("ModalUpload").modal('hide');
+    }
 }

@@ -50,6 +50,5 @@ public class HomeService {
             List<InferLogDAO> test = inferLogRepository.findByeID(principal.getEID(), pageRequest).getContent();
             model.addAttribute("logList", test);
         }
-
     }
 }

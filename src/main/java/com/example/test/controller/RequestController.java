@@ -31,7 +31,7 @@ public class RequestController {                                                
                                 @RequestParam("filedata") MultipartFile request,
                                 @RequestParam("solution") int solution) throws IOException {
         try {
-            fileObjKeyName = requestService.OriginalS3Upload(request);
+            requestService.OriginalS3Upload(request);
         }catch (Exception e) {
             e.printStackTrace();
             return 0;
@@ -49,7 +49,6 @@ public class RequestController {                                                
     @PostMapping(value = "/rekognition", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
     public String InferenceRekognition(Model model) throws IOException {
-
-        return "test";
+        return requestService.getRekognitionInferenceImage();
     }
 }

@@ -68,23 +68,47 @@
         </div>
     </section>
 </section>
-<main id="inference_main" >
-<%--    <form id="uploadForm" enctype="multipart/form-data" class="col-lg-6">--%>
-<%--        <input type="file" id="fileId" class="fileselect col-xl-5" name="filedata" accept="image/jpeg" onchange="setThumbnail(event);"/>--%>
-<%--        <select id="solution" name="solution" class="col-xl-2 col-md-6">--%>
-<%--            <option value=1>SageMaker</option>--%>
-<%--            <option value=2>Rekognition</option>--%>
-<%--            <option value=3>Both</option>--%>
-<%--        </select>--%>
-<%--    </form>--%>
-<%--    <input type="button" value="추론" id="file" class="btn btn-primary col-md-1 col-xl-1"><br>--%>
-<%--    <div id="Oritext" class="row">--%>
-<%--        <h1 class="col">원본이미지</h1>--%>
-<%--    </div>--%>
-<%--    <div class="text-center">--%>
-<%--            <img src="" class="img-thumbnail " id="originalImage">--%>
-<%--    </div>--%>
-</main>
+<main></main>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalUpload" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalUploadTitle">Inference..</h5>
+            </div>
+            <div class="modal-body">
+                추론중입니다. 잠시만 기다려 주십시오..
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalInference" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" id="ModalSize">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalInferenceTitle">Result</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h3 id="sageText"></h3>
+                    <img id="sageImage" src="">
+                </div>
+                <div>
+                    <h3 id="rekogText"></h3>
+                    <img id="rekogImage" src="">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Vendor JS Files -->
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
