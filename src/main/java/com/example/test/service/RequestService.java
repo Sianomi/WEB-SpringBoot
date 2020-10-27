@@ -65,11 +65,21 @@ public class RequestService {
 
     public String getSagemakerInferenceImage() throws IOException {
         Map<String, String> result = new HashMap<>();
-        Map<String, String> Json = new HashMap<>();
+        Map<String, Object> Json = new HashMap<>();
 
         result.put("result","");
         Json.put("originalS3Path", originalS3path);
         Json.put("saveS3Path", s3.getSageMakerS3Path());
+
+        String invokeResult = lambda.invokeRequest("sagemaker_inference", mapper.writeValueAsString(Json));
+        logger.info(invokeResult);
+        Json = mapper.readValue(invokeResult, Map.class);
+
+        if((int) Json.get("statusCode") == 200){
+            Json.put("resultName", Json.get("result"));
+            writeLog(Json, "SageMaker");
+            result.put("result", s3.getByte64ImageFromS3((String) Json.get("saveS3Path")));
+        }
 
         return mapper.writeValueAsString(result);
     }
@@ -86,16 +96,18 @@ public class RequestService {
 
         Json = mapper.readValue(invokeResult, Map.class);
 
-        JSONObject json = new JSONObject((String) Json.get("result"));
-        String nameList =  new String();
-        for(Object test : json.getJSONArray("CustomLabels")){
-            JSONObject CustomLabel = (JSONObject)test;
-            nameList += ( CustomLabel.getString("Name") + ", " );
-        }
-        Json.put("resultName", nameList);
-        writeLog(Json, "Rekognition");
+        if((int) Json.get("statusCode") == 200){
+            JSONObject json = new JSONObject((String) Json.get("result"));
+            String nameList =  new String();
+            for(Object test : json.getJSONArray("CustomLabels")){
+                JSONObject CustomLabel = (JSONObject)test;
+                nameList += ( CustomLabel.getString("Name") + ", " );
+            }
+            Json.put("resultName", nameList);
+            writeLog(Json, "Rekognition");
 
-        result.put("result", s3.getByte64ImageFromS3((String) Json.get("saveS3Path")));
+            result.put("result", s3.getByte64ImageFromS3((String) Json.get("saveS3Path")));
+        }
 
         return mapper.writeValueAsString(result);
     }

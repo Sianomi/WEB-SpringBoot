@@ -1,7 +1,6 @@
 package com.example.test.controller;
 
 import com.example.test.aws.S3;
-import com.example.test.aws.SageMaker;
 
 import com.example.test.service.RequestService;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +41,7 @@ public class RequestController {                                                
     @PostMapping(value = "/sagemaker", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
     public String InferenceSagemaker(Model model) throws IOException {
-
-        return "test";
+        return requestService.getSagemakerInferenceImage();
     }
 
     @PostMapping(value = "/rekognition", produces = MediaType.IMAGE_JPEG_VALUE)

@@ -14,7 +14,15 @@ import java.nio.charset.StandardCharsets;
 
 public class Lambda {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger;
+    AWSLambda awsLambda;
+
+    public Lambda() {
+        logger = LoggerFactory.getLogger(this.getClass());
+        awsLambda = AWSLambdaClientBuilder.standard()
+                .withRegion(Regions.AP_NORTHEAST_2)
+                .build();
+    }
 
     public String invokeRequest(String functionName, String jsonRequest){
         InvokeRequest invokeRequest = new InvokeRequest()
@@ -23,16 +31,12 @@ public class Lambda {
         InvokeResult invokeResult = null;
 
         try {
-            AWSLambda awsLambda = AWSLambdaClientBuilder.standard()
-                    .withCredentials(new ProfileCredentialsProvider())
-                    .withRegion(Regions.AP_NORTHEAST_2).build();
+
 
             invokeResult = awsLambda.invoke(invokeRequest);
 
             String ans = new String(invokeResult.getPayload().array(), StandardCharsets.UTF_8);
 
-            //write out the return value
-            System.out.println(ans);
             return ans;
 
         } catch (ServiceException e) {
