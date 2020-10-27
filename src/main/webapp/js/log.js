@@ -29,6 +29,10 @@ $(document).ready(function() {
             }
         }).done(function (result){
             ShowLogImage(result);
+        }).fail(function (){
+            if(!alert("이미지를 불러오는데 실패했습니다.\n잠시후에 다시 시도해주십시오.")) {
+                $("#ModalLog").modal("hide");
+            }
         });
     })
 });
