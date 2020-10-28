@@ -15,8 +15,8 @@ import static org.junit.Assert.*;
 public class S3Test {
 
     @Test
-    public void getByte64ImageFromS3() throws IOException {
+    public void getBase64ImageFromS3() throws IOException {
         S3 s3 = new S3();
-        System.out.println(s3.getByte64ImageFromS3("8shkim@naver.com/rekognition/2020-10-24/20200429_105534_018-2020-10-24-14-55-43.jpg"));
+        System.out.println(s3.getBase64ImageFromS3("8shkim@naver.com/rekognition/2020-10-24/20200429_105534_018-2020-10-24-14-55-43.jpg"));
     }
 }

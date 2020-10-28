@@ -17,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -61,28 +60,29 @@ public class S3 {
     public String OriginalUpload(MultipartFile file) {                                      // 원본 이미지 S3 저장 함수
         init(file);                                                                         // 초기화 함수 실행
 
-        fileObjKeyName = authentication.getName()+"/original/"+date+"/"                     // S3 Save Key Path 생성
+        fileObjKeyName = authentication.getName()+"/original/"+date+"/"                     // Path : 아이디/original/추론날짜/파일이름-추론날짜및시간.확장자
                 +FilenameUtils.getBaseName(fileName)+datetime+FilenameUtils.getExtension(fileName);
 
         return upload();                                                                    // S3 Upload 함수 실행
     }
 
-    public String getSageMakerS3Path() {
+    public String getSageMakerS3Path() {                                                    // SageMaker 추론 결과 Image를 저장할 S3 Path를 Retrun하는 함수
 
-        return authentication.getName()+"/sagemaker/"+date+"/"
+        return authentication.getName()+"/sagemaker/"+date+"/"                              // Path : 아이디/sagemaker/추론날짜/파일이름-추론날짜및시간.확장자
                 +FilenameUtils.getBaseName(fileName)+datetime+FilenameUtils.getExtension(fileName);
     }
 
-    public String getRekognitionS3Path() {
+    public String getRekognitionS3Path() {                                                  // Rekognition 추론 결과 Image를 저장할 S3 Path를 Retrun하는 함수
 
-        return authentication.getName()+"/rekognition/"+date+"/"
+        return authentication.getName()+"/rekognition/"+date+"/"                            // Path : 아이디/rekognition/추론날짜/파일이름-추론날짜및시간.확장자
                 +FilenameUtils.getBaseName(fileName)+datetime+FilenameUtils.getExtension(fileName);
     }
 
-    public String getByte64ImageFromS3(String s3Path) throws IOException {
-        S3Object response = s3Client.getObject(new GetObjectRequest(bucketName, s3Path));
-        String[] temp = s3Path.split("/");
-        return ByteArraytoBase64(IOUtils.toByteArray(response.getObjectContent()), temp[temp.length-1]);
+    public String getBase64ImageFromS3(String s3Path) throws IOException {                  // View에서 S3 Image에 대한 요청이 Controller를 통해 들어왔을 때 S3에서 이미지를
+                                                                                            // 불러와 Byte64 형태로 Return하기 위한 함수
+        S3Object response = s3Client.getObject(new GetObjectRequest(bucketName, s3Path));   // s3Client를 통해 s3Path 매개변수의 이미지를 불러옴
+        String[] temp = s3Path.split("/");                                            // 파일명을 알아내기 위한 함수. 이는 Base64에 Image Format을 작성해줘야하기 때문임
+        return ByteArraytoBase64(IOUtils.toByteArray(response.getObjectContent()), temp[temp.length-1]); // ByteArray를 Base64로 인코딩하는 함수를 호출
     }
 
     private String upload() {                                                                 // S3 업로드 함수
@@ -105,8 +105,8 @@ public class S3 {
         return fileObjKeyName;                                                                // Return S3 Key Path
     }
 
-    private String ByteArraytoBase64(byte[] bytearray, String OriginalFilename) throws IOException {
-        String fileExtName = OriginalFilename.substring(OriginalFilename.lastIndexOf(".")+1);
-        return "data:image/"+ fileExtName +";base64, " + Base64.getEncoder().encodeToString(bytearray);
+    private String ByteArraytoBase64(byte[] bytearray, String OriginalFilename) {             // ByteArray와 Filename을 매개변수로 받아 Base64 String으로 인코딩해주는 함수
+        return "data:image/"+ FilenameUtils.getExtension(OriginalFilename) +                  // 인코딩된 결과를 Return. HTML img src Base64 Format을 따름.
+                ";base64, " + Base64.getEncoder().encodeToString(bytearray);
     }
 }

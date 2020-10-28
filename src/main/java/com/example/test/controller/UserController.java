@@ -19,24 +19,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
 @Controller
-public class UserController {                                                       // User 정보를 Controll하기 위한 UserController
+public class UserController {                                                         // User 정보를 Controll하기 위한 UserController
 
-  private final UserService userService;                                            // 실제 처리를 위한 UserService
+  private final UserService userService;                                              // 실제 처리를 위한 UserService 변수
   
-  @GetMapping("/signup")
-  public String dispSignup() {                                                      // GET '/signup' 요청시 signup.jsp 회원가입 페이지 연결
-      return "/signup";
+  @GetMapping("/signup")                                                              // Get Request '/signup' path Mapping
+  public String dispSignup() {                                                        // 회원가입 페이지 요청을 처리하기 위한 Controller
+    return "/signup";                                                                 // return signup.jsp
   }
 
-  @PostMapping("/signup")                                                           // POST Request '/signup' path Mapping
-  @ResponseBody                                                                     // Variable Return 선언
-  public String signup(Model model, UserDTO infoDto) throws JsonProcessingException { // 회원가입 함수
+  @PostMapping("/signup")                                                             // POST Request '/signup' path Mapping
+  @ResponseBody                                                                     
+  public String signup(Model model, UserDTO infoDto) throws JsonProcessingException { // 회원가입 요청을 처리하기 위한 Controller
     return userService.save(model, infoDto);
   }
 
-  @GetMapping("/logout")                                                            // GET Request '/logout' path Mapping
-  public String logoutPage(HttpServletRequest request, HttpServletResponse response) { // 로그아웃 처리 함수
-    new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
-    return "redirect:/login";                                                          // login page Redirect
+  @GetMapping("/logout")                                                                // GET Request '/logout' path Mapping
+  public String logoutPage(HttpServletRequest request, HttpServletResponse response) {  // 로그아웃을 처리하기 위한 Controller
+    new SecurityContextLogoutHandler().logout(request, response,
+            SecurityContextHolder.getContext().getAuthentication());
+    return "redirect:/login";                                                           // login page Redirect
   }
 }

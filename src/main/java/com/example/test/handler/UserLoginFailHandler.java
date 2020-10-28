@@ -18,16 +18,16 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Service;
 
 @Service
-/* 로그인 실패 대응 로직 */
-public class UserLoginFailHandler implements AuthenticationFailureHandler {
+public class UserLoginFailHandler implements AuthenticationFailureHandler {                 // Login 실패시 예외처리를 하기 위한 Handler
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request,
-                                        HttpServletResponse response, AuthenticationException exception)
+    public void onAuthenticationFailure(HttpServletRequest request,                         // Login 실패시 호출되는 함수
+                                        HttpServletResponse response,
+                                        AuthenticationException exception)
             throws IOException, ServletException {
 
 
-        if (exception instanceof AuthenticationServiceException) {
+        if (exception instanceof AuthenticationServiceException) {                          // 로그인 실패 이유를 확인하고 해당 경우에 맞는 메시지를 생성.
             request.setAttribute("loginFailMsg", "존재하지 않는 사용자입니다.");
 
         } else if(exception instanceof BadCredentialsException) {
@@ -46,8 +46,8 @@ public class UserLoginFailHandler implements AuthenticationFailureHandler {
             request.setAttribute("loginFailMsg", "비밀번호가 만료되었습니다.");
         }
 
-        // 로그인 페이지로 다시 포워딩
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login");          // 로그인 페이지로 다시 포워딩
         dispatcher.forward(request, response);
     }
 }
