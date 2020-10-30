@@ -2,7 +2,10 @@ $(document).ready(function() {
     $('#logtable').DataTable(
         {
             "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
-            "iDisplayLength": 5
+            "iDisplayLength": 5,
+            order: [[5, 'desc']],
+            ordering: true,
+            serverSide: false
         }
     );
 
