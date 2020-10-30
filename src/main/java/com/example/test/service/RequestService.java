@@ -100,6 +100,10 @@ public class RequestService {                                           // 추�
     }
 
     private void writeLog(Map<String, Object> Json, String usedService) {                           // 추론 기록을 저장하기 위한 함수. 매개변수로 추론 정보가 저장된 Json 변수와 사용된 서비스명을 받음.
+        if(Json.get("result").equals("")) {                                                         // 검출된 결과가 아무것도 없다면
+            Json.put("result", "No Result");                                                        // DB에 No Result를 입력하도록 함
+        }
+
         inferLogRepository.save(InferLogDAO.builder()                                               // JPA save를 수행. 이는 SQL Insert를 수행하는 함수임
                 .bucketname("mgt-web-test")                                                         // Image Save S3 Bucket Name
                 .eID(principal.getEID())                                                            // 사용자 Email
